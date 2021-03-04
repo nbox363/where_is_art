@@ -29,7 +29,7 @@ async def process_help_command(message: types.Message):
 
 @dp.message_handler(commands=['variki'])
 async def process_variki(message: types.Message):
-    await message.reply("Здорово, долбоеб!\n Какие варики конкретно интересуют, братишка?", reply_markup=kb_variki)
+    await message.reply("Здорово!\n Какие варики конкретно интересуют, братишка?", reply_markup=kb_variki)
 
 
 
@@ -55,7 +55,7 @@ async def process_callback_rodina(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(lambda c: c.data == 'exhibition')
 async def process_callback_exhibition(callback_query: types.CallbackQuery):
     await bot.answer_callback_query(callback_query.id)
-    await bot.send_message(callback_query.from_user.id, 'По выставкам вариков не дохуя', reply_markup=kb_exhibition)
+    await bot.send_message(callback_query.from_user.id, 'По выставкам варики такие ', reply_markup=kb_exhibition)
 
 
 # Mif #

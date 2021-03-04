@@ -20,7 +20,7 @@ class Film:
         self.hall = hall
 
     def __repr__(self):
-        return f'Кинцо заебатое "{self.name}"\nПо бабкам не дохуя всего {self.price}\nПо времени не поздно в {self.time}'
+        return f'Кинцо "{self.name}"\nПо бабкам всего {self.price}\nПо времени не поздно в {self.time}'
 
 
 class Exhibition:
@@ -31,7 +31,7 @@ class Exhibition:
         self.place = place
 
     def __repr__(self):
-        return f'Выставка сытная "{self.title}"\nПо бабкам не дохуя всего {self.price}\nПо дате вот так {self.date}\nМесто приличное{self.place}'
+        return f'Выставка сытная "{self.title}"\nПо бабкам всего {self.price}\nПо дате вот так {self.date}\nМесто приличное{self.place}'
 
 
 class ABCFilmHandler(ABC):
@@ -75,7 +75,7 @@ class MifHandler(ABCExhibitionHandler):
             exhibition = Exhibition(
                 title=l.find('.title')[0].text,
                 date=l.find('.date')[0].text,
-                price='по бабкам хуй пойми',
+                price='по бабкам не ясно',
                 place=l.find('.place')[0].text)
 
             all_program.append(exhibition)
@@ -86,6 +86,7 @@ class MifHandler(ABCExhibitionHandler):
         return urls['mif']
 
 
+#TODO
 class ManegeHandler(ABCExhibitionHandler):
     def get(self) -> List[Exhibition]:
         session = HTMLSession()
@@ -106,41 +107,3 @@ class ManegeHandler(ABCExhibitionHandler):
     def url(self):
         return urls['manege']
 
-
-def get() -> List[Exhibition]:
-    session = HTMLSession()
-    resp = session.get(murl())
-    all_program = []
-
-
-
-    a = resp.html.find('.search-layout__body', first=True)
-
-    f = a.find('.layout', first=True)
-    s = f.find('.layout__content', first=True)
-    r = s.find('.recommendations', first=True)
-    c = r.find('.recommendations__container', first=True)
-    y = c.find('.card')
-
-    print(y)
-    # for i in all_years:
-    #     print(i.find('.main__year__block-2021'))
-
-    # for l in resp.html.find('.card__head'):
-        # exhibition = Exhibition(
-        #     title=l.find('.vdsw_ch_fontsize vdsw_ch_kerning')[0],
-        #     date=l.find('.card__meta__info'),
-        #     price='по бабкам хуй пойми',
-        #     place='Исаакиевская площадь, 1')
-
-        # title = l.find('.card__meta__info').text
-        # print(l.text)
-
-        # all_program.append(exhibition)
-
-
-
-def murl():
-    return urls['manege']
-
-get()
